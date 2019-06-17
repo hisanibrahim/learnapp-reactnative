@@ -13,6 +13,9 @@ import React, { Component } from 'react';
 import { ScrollView, TextInput, StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 import { placeholder } from '@babel/types';
 
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { classes } from 'istanbul-lib-coverage';
+
 
 
 // const instructions = Platform.select({
@@ -21,6 +24,92 @@ import { placeholder } from '@babel/types';
 //     'Double tap R on your keyboard to reload,\n' +
 //     'Shake or press menu button for dev menu',
 // });
+
+class HomeScreen extends Component {
+  render() {
+
+    const pic = {
+      uri: 'https://www.aljazeera.com/mritems/imagecache/mbdxxlarge/mritems/Images/2019/6/12/00638d9b151c449c87d6beda0c208f27_18.jpg'
+    };
+
+    return (
+
+      <ScrollView>
+        <PizzaTranslator></PizzaTranslator>
+        <StyleSheetTest></StyleSheetTest>
+        {/* <BlinkApp></BlinkApp> */}
+        <Greeting name="Mobin"></Greeting>
+        <Greeting name="Varsha"></Greeting>
+        <Greeting name="Ginu"></Greeting>
+        <Image source={pic} style={styles.containerImage}></Image>
+        <Text>Hello World!</Text>
+
+        <Button title='Click'
+        onPress={() => this.props.navigation.navigate('Second') }>
+        </Button>
+      </ScrollView>
+
+    );
+  }
+}
+
+class SecondScreen extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>You are in the second Screen</Text>
+      </View>
+    );
+  }
+}
+
+const AppNavigator = createStackNavigator({
+  Home: HomeScreen,
+  Second: SecondScreen,
+},
+{
+  initialRouteName: 'Home'
+});
+
+
+//export default createAppContainer(AppNavigator);
+
+
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class App extends Component {
+  render() {
+    return (
+      <AppContainer></AppContainer>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  containerImage: {
+    width: 300,
+    height: 300
+  }
+
+});
+
+const learnstyles = StyleSheet.create({
+
+  bigBlue: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  red: {
+    color: 'red',
+  },
+});
 
 
 class PizzaTranslator extends Component {
@@ -48,65 +137,13 @@ class PizzaTranslator extends Component {
             Alert.alert('You tapped');
           }}
           title="Press"
-          ></Button>
+        ></Button>
 
       </View >
     );
   }
 }
 
-
-
-export default class App extends Component {
-  render() {
-
-    const pic = {
-      uri: 'https://www.aljazeera.com/mritems/imagecache/mbdxxlarge/mritems/Images/2019/6/12/00638d9b151c449c87d6beda0c208f27_18.jpg'
-    };
-
-    return (
-      // <View style={styles.container}>
-      <ScrollView>
-        
-        <PizzaTranslator></PizzaTranslator>
-        <StyleSheetTest></StyleSheetTest>
-        {/* <BlinkApp></BlinkApp> */}
-        <Greeting name="Mobin"></Greeting>
-        <Greeting name="Varsha"></Greeting>
-        <Greeting name="Ginu"></Greeting>
-        <Image source={pic} style={styles.containerImage}></Image>
-        <Text>Hello World!</Text>
-
-      </ScrollView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  containerImage: {
-    width: 300,
-    height: 300
-  }
-
-});
-
-
-const learnstyles = StyleSheet.create({
-
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'red',
-  },
-});
 
 class FixedDimBasics extends Component {
   render() {
